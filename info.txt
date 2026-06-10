@@ -19,3 +19,4 @@ Before any custom work: run the simplest possible official example inference to 
 Document the exact input format the action-cond model expects (initial frame, action array shape and meaning, any state/seed/config). Do not build custom inputs yet — just confirm the model runs on a provided/sample input.
 Stop after Stage 1. Summarize: what's installed, how to run the smoke test, VRAM/runtime observed, and any problems. Wait for me before continuing.
 
+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
