@@ -1,0 +1,21 @@
+STAGE 1
+I'm building a research project to compare two robot world models — NVIDIA Cosmos-Predict2.5-2B (robot/action-cond variant) and Meta V-JEPA 2-AC — by studying their video predictions (visual quality, temporal consistency, and failure modes like hallucinated reflections). This is a qualitative prediction study, NOT a robotics/planning project: do not write any robot-control, energy-minimization, or MPC code.
+We are working in stages, and I want you to do only the current stage, then stop and summarize what you did and how I verify it before proposing the next stage. Do not scaffold future stages ahead of time. Ask me before installing anything large or downloading model weights.
+Project structure — set up this folder layout and keep everything in its correct subfolder:
+/cosmos/        # all Cosmos-Predict2.5 code, configs, env
+/vjepa/         # all V-JEPA 2-AC code, configs, env  (later stage)
+/shared/        # code used by both: input-episode builders, comparison/visualization (later stage)
+/inputs/        # custom input episodes (frames, action arrays, state, metadata)
+/outputs/       # generated videos / decoded predictions, organized per run
+/notes/         # markdown logs of what works, commands, gotchas
+README.md       # top-level: project goal + current stage status
+Keep Cosmos and V-JEPA in separate Python environments (they have conflicting CUDA/PyTorch dependencies) — document each env's setup in its own subfolder.
+Hardware: 2× NVIDIA RTX 4500 Ada (24GB each, no NVLink), Intel Xeon w7-3445. Assume ~22.5GB usable per card. Note the Cosmos action-cond model is memory-heavy and may need reduced settings (short clips, low res, fewer steps) or sharding — flag this rather than assuming it fits.
+
+STAGE 1 (do this now, and only this): Get Cosmos-Predict2.5-2B working.
+Set up /cosmos/ with its own environment and document the install steps in /notes/cosmos_setup.md.
+Clone/reference the official nvidia-cosmos/cosmos-predict2.5 repo and identify the robot/action-cond inference entry point.
+Before any custom work: run the simplest possible official example inference to confirm the model loads and produces output on this hardware. Report VRAM usage and runtime.
+Document the exact input format the action-cond model expects (initial frame, action array shape and meaning, any state/seed/config). Do not build custom inputs yet — just confirm the model runs on a provided/sample input.
+Stop after Stage 1. Summarize: what's installed, how to run the smoke test, VRAM/runtime observed, and any problems. Wait for me before continuing.
+
